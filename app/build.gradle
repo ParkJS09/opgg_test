@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.example.opgg_test'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.opgg_test"
+        minSdk 23
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation deps.core_ktx
+    implementation deps.appcompat
+    implementation deps.material
+    implementation deps.constraint_layout
+    implementation 'androidx.paging:paging-common-ktx:3.1.1'
+    testImplementation deps.junit
+    androidTestImplementation deps.test_junit
+    androidTestImplementation deps.test_espresso_core
+
+    //Nav
+    implementation deps.nav.nav_fragment_ktx
+    implementation deps.nav.nav_ui_ktx
+    //Retrofit
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    //Glide
+    implementation deps.glide.runtime
+    annotationProcessor deps.glide.compiler
+    //Hilt
+    implementation deps.hilt
+    kapt deps.hilt_compiler
+    //Pagin
+    implementation deps.paging3
+}

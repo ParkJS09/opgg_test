@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.example.opgg_test.domain.model.RecentGameModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_begin_champion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="154dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_begin_position"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="96dp" />
+
+        <TextView
+            android:id="@+id/tv_recent_game_title"
+            style="@style/TextStyle7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최근 20게임 분석"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_recent_game_win_lose"
+            style="@style/TextStyle7"
+            losses="@{item.losses}"
+            wins="@{item.wins}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_game_title" />
+
+        <TextView
+            android:id="@+id/tv_recent_game_kda"
+            style="@style/TextStyle9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:bufferType="spannable"
+            app:assist="@{item.assists}"
+            app:death="@{item.deaths}"
+            app:kill="@{item.kills}"
+            app:darkgray="@{false}"
+            app:isTypeDouble="@{true}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_game_win_lose" />
+
+        <TextView
+            android:id="@+id/tv_recent_game_kdaper"
+            style="@style/TextStyle10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:kda="@{item.kda}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_game_kda"
+            app:winper="@{item.winPer}" />
+
+        <TextView
+            android:id="@+id/tv_recent_champion_title"
+            style="@style/TextStyle8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="모스트 승률"
+            app:layout_constraintEnd_toStartOf="@+id/gl_begin_position"
+            app:layout_constraintStart_toStartOf="@+id/gl_begin_champion"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_recent_champ1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:visibility="@{item.mostChamp != null ? View.VISIBLE : View.GONE}"
+            app:circleCrop="@{true}"
+            app:imageUrl="@{item.mostChamp.imgUrl}"
+            app:layout_constraintEnd_toStartOf="@+id/iv_recent_champ2"
+            app:layout_constraintStart_toStartOf="@+id/gl_begin_champion"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_champion_title" />
+
+        <TextView
+            android:id="@+id/tv_recent_champ1_winper"
+            style="@style/TextStyle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="@{item.mostChamp != null ? View.VISIBLE : View.GONE}"
+            app:champWinPer="@{item.mostChamp.winPer}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_recent_champ1"
+            app:layout_constraintStart_toEndOf="@+id/iv_recent_champ1"
+            app:layout_constraintTop_toBottomOf="@+id/iv_recent_champ1" />
+
+        <ImageView
+            android:id="@+id/iv_recent_champ2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:visibility="@{item.mostChamp2 != null ? View.VISIBLE : View.GONE}"
+            app:circleCrop="@{true}"
+            app:imageUrl="@{item.mostChamp2.imgUrl}"
+            app:layout_constraintEnd_toStartOf="@+id/gl_begin_position"
+            app:layout_constraintStart_toEndOf="@+id/iv_recent_champ1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_champion_title" />
+
+        <TextView
+            android:id="@+id/tv_recent_champ2_winper"
+            style="@style/TextStyle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="@{item.mostChamp2 != null ? View.VISIBLE : View.GONE}"
+            app:champWinPer="@{item.mostChamp2.winPer}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_recent_champ2"
+            app:layout_constraintStart_toEndOf="@+id/iv_recent_champ2"
+            app:layout_constraintTop_toBottomOf="@+id/iv_recent_champ2" />
+
+        <TextView
+            android:id="@+id/tv_recent_position_title"
+            style="@style/TextStyle8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="포지션"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl_begin_position"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_recent_position"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:visibility="@{item.mostPosition != null ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl_begin_position"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_position_title"
+            app:position="@{item.mostPosition}" />
+
+        <TextView
+            android:id="@+id/tv_recent_position_percent"
+            style="@style/TextStyle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="@{item.mostPositionPer}"
+            android:visibility="@{item.mostPosition != null ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl_begin_position"
+            app:layout_constraintTop_toBottomOf="@+id/iv_recent_position" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

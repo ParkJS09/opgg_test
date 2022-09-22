@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.example.opgg_test.presenter.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_main"
+            uiState="@{vm.uiState}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/pale_grey_two"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_isLoading"
+            uiState="@{vm.uiState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="잠시만 기다려주시기 바랍니다"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/pb_isLoading"
+            uiState="@{vm.uiState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_isLoading"
+            app:layout_constraintStart_toStartOf="@+id/tv_isLoading"
+            app:layout_constraintTop_toBottomOf="@+id/tv_isLoading" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_refresh"
+            style="@style/TextStyle3"
+            uiState="@{vm.uiState}"
+            android:layout_width="89dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_btn_refresh"
+            android:onClick="@{()->vm.getAllData()}"
+            android:text="새로고침"
+            app:layout_constraintEnd_toEndOf="@+id/tv_isLoading"
+            app:layout_constraintStart_toStartOf="@+id/tv_isLoading"
+            app:layout_constraintTop_toBottomOf="@+id/pb_isLoading" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
